@@ -1,0 +1,1 @@
+a:1:{s:8:"category";a:3:{s:5:"title";s:11:"Category %s";s:4:"slug";s:8:"category";s:8:"per_page";i:7;}}
