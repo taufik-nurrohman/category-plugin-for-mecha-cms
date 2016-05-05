@@ -1,0 +1,12 @@
+category: Category
+categorys: Categories
+categories: Categories
+categorised: Categorised
+categorized: Categorized
+uncategorised: Uncategorised
+uncategorized: Uncategorized
+
+widget:
+  category: Category
+  categorys: Categories
+  categories: Categories

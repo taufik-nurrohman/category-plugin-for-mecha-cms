@@ -28,6 +28,16 @@ function do_category_field($data) {
 
 Filter::add('shield:lot', 'do_category_field');
 
+foreach(glob(POST . DS . '*', GLOB_NOSORT | GLOB_ONLYDIR) as $v) {
+    $v = File::B($v);
+    Weapon::add($v . '_footer', function() use($speak, $v) {
+        $config = Config::get();
+        if(isset($config->{$v}->category) && $config->{$v}->category !== false) {
+            echo O_BEGIN . '<div>' . $speak->category . ': <a href="' . Filter::colon('category:url', $config->url . '/' . $config->category->slug . '/' . $config->{$v}->category->slug) . '">' . $config->{$v}->category->name . '</a></div>' . O_END;
+        }
+    });
+}
+
 
 /**
  * Category Page
@@ -42,7 +52,7 @@ Route::accept(array($config->category->slug . '/(:any)', $config->category->slug
     // Exclude these fields ...
     $excludes = (array) Config::get($config->page_type . '_fields_exclude', array('content'));
     if( ! $category = Get::articleCategory('slug:' . $slug)) {
-        Shield::abort('404-tag');
+        Shield::abort('404-category');
     }
     $s = Get::articles('DESC', 'kind:C' . $category->id);
     if($articles = Mecha::eat($s)->chunk($offset, $config->tag->per_page)->vomit()) {
@@ -50,7 +60,7 @@ Route::accept(array($config->category->slug . '/(:any)', $config->category->slug
             return Get::article($path, $excludes);
         });
     } else {
-        Shield::abort('404-tag');
+        Shield::abort('404-category');
     }
     Filter::add('pager:url', function($url) {
         return Filter::apply('category:url', $url);

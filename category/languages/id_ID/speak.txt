@@ -1,0 +1,12 @@
+category: Kategori
+categorys: Kategori
+categories: Kategori
+categorised: Dikategorikan
+categorized: Dikategorikan
+uncategorised: Tak Berkategori
+uncategorized: Tak Berkategori
+
+widget:
+  category: Kategori
+  categorys: Kategori
+  categories: Kategori
