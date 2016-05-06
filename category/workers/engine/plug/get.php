@@ -4,8 +4,13 @@
 Get::plug('state_category', function($id = null, $fallback = array(), $all = true, $scope = null) {
     $config = Config::get();
     $speak = Config::speak();
-    $d = File::D(__DIR__, 2) . DS . 'repair.state.category.php';
-    $category = file_exists($d) ? include $d : $fallback;
+    $category = array(
+        0 => array(
+            'name' => $speak->uncategorised,
+            'slug' => Text::parse($speak->uncategorised, '->slug'),
+            'description' => ""
+        )
+    );
     if($file = File::exist(STATE . DS . 'category.txt')) {
         Mecha::extend($category, File::open($file)->unserialize());
     }
@@ -81,8 +86,8 @@ Get::plug('category', function($filter, $output = null, $fallback = false, $scop
         foreach($categories as $k => $v) {
             if(
                 (is_numeric($filter) && (int) $filter === (int) $v->id) || // by ID
-                (is_string($filter) && (string) $filter === (string) $v->slug) || // by slug
-                (is_string($filter) && (string) $filter === (string) $v->name) // by name
+                (string) $filter === (string) $v->slug || // by slug
+                (string) $filter === (string) $v->name // by name
             ) {
                 return is_null($output) ? $v : (isset($v->{$output}) ? $v->{$output} : $fallback);
             }

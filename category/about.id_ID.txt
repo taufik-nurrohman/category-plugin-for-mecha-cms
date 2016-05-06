@@ -1,0 +1,59 @@
+Title: Kategori
+Author: Taufik Nurrohman
+URL: http://latitudu.com
+Version: 1.0.0
+
+====
+
+> Fitur kategori.
+
+Kategori itu hampir sama dengan label. Yang membedakan adalah bahwa Anda hanya dapat menentukan satu kategori saja untuk satu artikel.
+
+#### Tipe Halaman
+
+ - `category` → untuk halaman kategori
+
+~~~ .php
+if($config->page_type === 'category') {
+    echo 'Anda sedang berada di halaman kategori.';
+}
+~~~
+
+#### Metode
+
+##### Mendapatkan Kategori-Kategori
+
+~~~ .php
+Get::categories($order = 'ASC', $sorter = 'name');
+~~~
+
+##### Mendapatkan Kategori
+
+Mengeluarkan item kategori spesifik yang disaring berdasarkan data yang tersedia.
+
+~~~ .php
+Get::category($filter, $output = null, $fallback = false);
+~~~
+
+#### Widget
+
+##### Kategori
+
+~~~ .php
+echo Widget::category();
+~~~
+
+~~~ .php
+echo Widget::category('LIST');
+echo Widget::category('CLOUD');
+echo Widget::category('DROPDOWN');
+~~~
+
+~~~ .php
+echo Shield::chunk('block.widget', array(
+    'title' => $speak->widget->categories,
+    'content' => Widget::category()
+));
+~~~
+
+<!-- block:donate -->

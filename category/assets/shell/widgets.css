@@ -1,0 +1,31 @@
+.widget-category-cloud {overflow:hidden}
+
+.widget-category-cloud .size {
+  vertical-align:middle;
+  white-space:nowrap;
+}
+
+.widget-category-cloud .size-0 {font-size:80%}
+.widget-category-cloud .size-1 {font-size:90%}
+.widget-category-cloud .size-2 {font-size:100%}
+.widget-category-cloud .size-3 {font-size:110%}
+.widget-category-cloud .size-4 {font-size:120%}
+.widget-category-cloud .size-5 {font-size:130%}
+.widget-category-cloud .size-6 {font-size:140%}
+.widget-category-cloud .size-7 {font-size:150%}
+
+.widget-category-dropdown select {
+  -webkit-box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  box-sizing:border-box;
+  display:block;
+  width:100%;
+  font:inherit;
+  color:inherit;
+  background:none;
+  border:1px solid;
+  outline:none;
+  margin:0;
+  padding:.5em;
+  cursor:pointer;
+}
