@@ -3,7 +3,7 @@ Category Plugin for Mecha CMS
 
 > Category feature.
 
-Categories are similar with tags. The difference is that you can only determine one category per article.
+Categories are similar with tags. The only difference is that you can only determine one category per article.
 
 ### Page Types
 
