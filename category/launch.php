@@ -26,16 +26,15 @@ Weapon::add('SHIPMENT_REGION_BOTTOM', function() {
 }, 10.1);
 
 function do_category_search($kind, $scope = null, $fallback = false) {
+    if( ! $kind) return $fallback;
     $kind = (array) $kind;
     if(isset($kind[0]) && strpos($kind[0], 'C') === 0) {
         return Get::category('id:' . substr($kind[0], 1), null, $fallback, $scope);
     }
-    /*
     foreach($kind as $v) {
         if($v && strpos($v, 'C') === 0) {
             return Get::category('id:' . substr($v, 1), null, $fallback, $scope);
         }
     }
-    */
     return $fallback;
 }
