@@ -6,8 +6,8 @@ Get::plug('state_category', function($id = null, $fallback = array(), $all = tru
     $speak = Config::speak();
     $category = array(
         0 => array(
-            'name' => $speak->uncategorised,
-            'slug' => Text::parse($speak->uncategorised, '->slug'),
+            'name' => $speak->uncategorized,
+            'slug' => Text::parse($speak->uncategorized, '->slug'),
             'description' => ""
         )
     );

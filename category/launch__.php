@@ -26,16 +26,18 @@ function do_category_field($data) {
     return $data;
 }
 
-Filter::add('shield:lot', 'do_category_field');
+// Add category link to post(s) footer
+function do_category_link($post) {
+    global $config, $speak;
+    if(isset($post->category) && $post->category !== false) {
+        echo O_BEGIN . '<div>' . $speak->category . ': <a href="' . Filter::colon('category:url', $config->url . '/' . $config->category->slug . '/' . $post->category->slug) . '">' . $post->category->name . '</a></div>' . O_END;
+    }
+}
 
+// Apply filter(s) and weapon(s) ...
+Filter::add('shield:lot', 'do_category_field');
 foreach(glob(POST . DS . '*', GLOB_NOSORT | GLOB_ONLYDIR) as $v) {
-    $v = File::B($v);
-    Weapon::add($v . '_footer', function() use($speak, $v) {
-        $config = Config::get();
-        if(isset($config->{$v}->category) && $config->{$v}->category !== false) {
-            echo O_BEGIN . '<div>' . $speak->category . ': <a href="' . Filter::colon('category:url', $config->url . '/' . $config->category->slug . '/' . $config->{$v}->category->slug) . '">' . $config->{$v}->category->name . '</a></div>' . O_END;
-        }
-    });
+    Weapon::add(File::B($v) . '_footer', 'do_category_link');
 }
 
 
