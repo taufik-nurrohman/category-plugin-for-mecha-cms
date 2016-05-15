@@ -13,11 +13,12 @@ function do_category_field($data) {
         // post(s)
         if(isset($data[$v . 's']) && $data[$v . 's'] !== false) {
             foreach($data[$v . 's'] as &$vv) {
+                if( ! isset($vv->kind)) continue;
                 $vv->category_raw = Filter::colon($v . ':category_raw', do_category_search($vv->kind, $v), $vv);
                 $vv->category = Filter::colon($v . ':category', $vv->category_raw, $vv);
             }
         // post
-        } else if(isset($data[$v]) && $data[$v] !== false) {
+        } else if(isset($data[$v]->kind)) {
             $s = $data[$v];
             $data[$v]->category_raw = Filter::colon($v . ':category_raw', do_category_search($s->kind, $v), $s);
             $data[$v]->category = Filter::colon($v . ':category', $data[$v]->category_raw, $s);
