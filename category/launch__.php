@@ -36,7 +36,7 @@ Route::accept(array($config->category->slug . '/(:any)', $config->category->slug
         Shield::abort('404-category');
     }
     $s = Get::articles('DESC', 'kind:C' . $category->id);
-    if($articles = Mecha::eat($s)->chunk($offset, $config->tag->per_page)->vomit()) {
+    if($articles = Mecha::eat($s)->chunk($offset, $config->category->per_page)->vomit()) {
         $articles = Mecha::walk($articles, function($path) use($excludes) {
             return Get::article($path, $excludes);
         });
