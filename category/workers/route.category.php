@@ -41,7 +41,7 @@ Route::accept(array($config->manager->slug . '/category/ignite', $config->manage
         $title = Config::speak('manager.title_new_', $speak->category) . $config->title_separator . $config->manager->title;
     } else {
         if( ! isset($categories[$id])) {
-            Shield::abort(); // Field not found!
+            Shield::abort(); // Category not found!
         }
         $data = $categories[$id];
         $data['id'] = $id;
