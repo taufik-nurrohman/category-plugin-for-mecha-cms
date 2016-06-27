@@ -30,9 +30,6 @@ Route::accept($config->manager->slug . '/category', function() use($config, $spe
 
 Route::accept(array($config->manager->slug . '/category/ignite', $config->manager->slug . '/category/repair/id:(:any)'), function($id = false) use($config, $speak, $categories) {
     if($id === false) {
-        Weapon::add('SHIPMENT_REGION_BOTTOM', function() {
-            echo '<script>(function($){$.slug(\'name\',\'slug\',\'-\')})(DASHBOARD.$);</script>';
-        }, 11);
         $_ = array_keys($categories);
         $data = array(
             'id' => $_ ? max($_) + 1 : 0,
@@ -127,7 +124,7 @@ Route::accept($config->manager->slug . '/category/kill/id:(:any)', function($id 
         Shield::abort();
     }
     if( ! isset($categories[$id])) {
-        Shield::abort(); // Tag not found!
+        Shield::abort(); // Category not found!
     }
     $title = $categories[$id]['name'];
     Config::set(array(
