@@ -6,27 +6,6 @@ if(strpos($config->url_path . '/', $config->category->slug . '/') === 0) {
     Config::set('page_type', 'category');
 }
 
-// Add `$post->category` field to post(s)
-function do_category_field($data) {
-    foreach(glob(POST . DS . '*', GLOB_NOSORT | GLOB_ONLYDIR) as $v) {
-        $v = File::B($v);
-        // post(s)
-        if(isset($data[$v . 's']) && $data[$v . 's'] !== false) {
-            foreach($data[$v . 's'] as &$vv) {
-                if( ! isset($vv->kind)) continue;
-                $vv->category_raw = Filter::colon($v . ':category_raw', do_category_search($vv->kind, $v), $vv);
-                $vv->category = Filter::colon($v . ':category', $vv->category_raw, $vv);
-            }
-        // post
-        } else if(isset($data[$v]->kind)) {
-            $s = $data[$v];
-            $data[$v]->category_raw = Filter::colon($v . ':category_raw', do_category_search($s->kind, $v), $s);
-            $data[$v]->category = Filter::colon($v . ':category', $data[$v]->category_raw, $s);
-        }
-    }
-    return $data;
-}
-
 // Add category link to post(s) footer
 function do_category_link($post) {
     global $config, $speak;
@@ -35,8 +14,7 @@ function do_category_link($post) {
     }
 }
 
-// Apply filter(s) and weapon(s) ...
-Filter::add('shield:lot', 'do_category_field');
+// Apply weapon(s) ...
 foreach(glob(POST . DS . '*', GLOB_NOSORT | GLOB_ONLYDIR) as $v) {
     Weapon::add(File::B($v) . '_footer', 'do_category_link');
 }

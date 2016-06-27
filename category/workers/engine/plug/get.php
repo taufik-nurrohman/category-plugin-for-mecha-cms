@@ -75,8 +75,8 @@ Get::plug('category', function($filter, $output = null, $fallback = false, $scop
     // alternate 2: `Get::category('id:2', 'slug', false)`
     if(strpos($filter, ':') !== false) {
         list($key, $value) = explode(':', $filter, 2);
+        $value = Converter::strEval($value);
         foreach($categories as $k => $v) {
-            $value = Converter::strEval($value);
             if(isset($v->{$key}) && $v->{$key} === $value) {
                 return is_null($output) ? $v : (isset($v->{$output}) ? $v->{$output} : $fallback);
             }

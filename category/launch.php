@@ -27,7 +27,6 @@ Weapon::add('SHIPMENT_REGION_BOTTOM', function() {
 
 function do_category_search($kind, $scope = null, $fallback = false) {
     if( ! $kind) return $fallback;
-    $kind = (array) $kind;
     if(isset($kind[0]) && strpos($kind[0], 'C') === 0) {
         return Get::category('id:' . substr($kind[0], 1), null, $fallback, $scope);
     }
@@ -37,4 +36,16 @@ function do_category_search($kind, $scope = null, $fallback = false) {
         }
     }
     return $fallback;
+}
+
+function do_category_set($results, $FP, $data) {
+    $category = isset($data['kind']) ? do_category_search($data['kind'], rtrim($FP, ':')) : false;
+    $results['category_raw'] = Filter::colon($FP . 'category_raw', $category, $results);
+    $results['category'] = Filter::colon($FP . 'category', $results['category_raw'], $results);
+    return $results;
+}
+
+foreach(glob(POST . DS . '*', GLOB_NOSORT | GLOB_ONLYDIR) as $v) {
+    $v = File::B($v);
+    Filter::add($v . ':output', 'do_category_set');
 }
