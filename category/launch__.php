@@ -3,7 +3,15 @@
 // Quick page type detection ...
 if(strpos($config->url_path . '/', $config->category->slug . '/') === 0) {
     $config->page_type = 'category';
-    Config::set('page_type', 'category');
+    $config->is->posts = true;
+    $config->is->post = false;
+    Config::set(array(
+        'page_type' => 'category',
+        'is' => array(
+            'posts' => true,
+            'post' => false
+        )
+    ));
 }
 
 // Add category link to post(s) footer
